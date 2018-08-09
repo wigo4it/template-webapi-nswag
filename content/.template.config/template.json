@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Sjef van Leeuwen",
+    "classifications": [ "WebAPI", "OpenAPI", "Swagger" ],
+    "identity": "Wigo4It.WebApiNSwagTemplate.CSharp",
+    "name": "WIGO4IT NSwag OpenAPI",
+    "shortName": "W4WebApiNSwag",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "sourceName": "template-webapi-nswag",
+    "preferNameDirectory": true
+}

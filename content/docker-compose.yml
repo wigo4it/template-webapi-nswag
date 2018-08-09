@@ -1,0 +1,18 @@
+version: '3.4'
+
+x-logging:
+  &default-logging
+  options:
+    max-size: "10m"
+    max-file: "5"
+  driver: json-file
+
+services:
+  api:
+    image: template-webapi-nswag
+    build:
+      context: ./template-webapi-nswag
+      dockerfile: Dockerfile
+    hostname: template-webapi-nswag
+    restart: always
+    logging: *default-logging

@@ -14,7 +14,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Install template
 ```
 nuget pack Wigo4It.WebApiNSwagTemplate.CSharp.nuspec
-dotnet new -i Wigo4It.WebApiNSwagTemplate.CSharp::*
+dotnet new -i Wigo4It.WebApiNSwagTemplate.CSharp.1.0.0.nupkg
 ```
 The template **W4WebAPiNSwag** should now appear in the .NET core template list
 
@@ -26,6 +26,8 @@ Class library| classlib| [C#], F#, VB |Common/Library|
 |**WIGO4IT NSwag OpenAPI**| **W4WebApiNSwag**|**[C#]**| **WebAPI/OpenAPI/Swagger**
 ASP . NET Core with Angular|angular|[C#]|Web/MVC/SPA|
 |.......|....... |....... |...... |
+
+You can also run the build-template.bat file from the command line.
 
 ## Uninstall template
 ```
@@ -43,10 +45,24 @@ dotnet new W4WebApiNSwag
 
 MyApi.csproj should now have been created, and the namespace should also reflect MyAPI in the source code files.
 
+### Building Docker Images
+
+The docker compose yaml will automatically reflect your namespaces/projectname.
+
+```
+docker-compose up --build -d
+```
+
+The API should now be reachable from:
+
+* [SWAGGER](http://localhost:5080/swagger) - Swagger API documentation page
+* [REDOC](http://localhost:5080/redoc) - Redoc API documentation page
+
 
 ## Built With
 
-* [VSCODE](hhttps://code.visualstudio.com/) - The IDE used
+* [VSCODE](https://code.visualstudio.com/) - The IDE used
+* [DOCKER](https://www.docker.com/) - Build, Ship, and Run Any App, Anywhere
 
 ## Contributing
 

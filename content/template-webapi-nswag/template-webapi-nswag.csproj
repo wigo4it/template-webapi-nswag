@@ -16,6 +16,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="nswag.aspnetcore" Version="11.18.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Mapster" Version="3.1.8" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using template_webapi_nswag.Models;
 
 namespace template_webapi_nswag.Controllers
 {
@@ -27,7 +28,10 @@ namespace template_webapi_nswag.Controllers
         [Description("Get value by providing an Id")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            using (ValueContext ctx = new ValueContext(null))
+            {
+                return ctx.Values.FirstOrDefault(p=>p.Id==id).Val;
+            }
         }
 
         // POST api/values
@@ -35,6 +39,7 @@ namespace template_webapi_nswag.Controllers
         [Description("Post a new value")]
         public void Post([FromBody] string value)
         {
+            
         }
 
         // PUT api/values/5

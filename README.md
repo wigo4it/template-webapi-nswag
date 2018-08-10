@@ -58,9 +58,6 @@ The API should now be reachable from:
 * [SWAGGER](http://localhost:5080/swagger) - Swagger API documentation page
 * [REDOC](http://localhost:5080/redoc) - Redoc API documentation page
 
-![swagger screenshot](./doc/screen-swagger.png)
-![redoc screenshot](./doc/screen-redoc.png)
-
 ## Built With
 
 * [VSCODE](https://code.visualstudio.com/) - The IDE used

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace template_webapi_nswag.Models
+namespace template_identifier.Models
 {
     public class ValueContext : DbContext
     {

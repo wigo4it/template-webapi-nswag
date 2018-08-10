@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using template_webapi_nswag.Models;
+using template_identifier.Models;
 
 namespace template_identifier.Controllers
 {

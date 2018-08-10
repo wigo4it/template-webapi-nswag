@@ -1,6 +1,6 @@
-# OpenAPI Templates
+# OpenAPI Templates (Entity Framework)
 
-ASP.NET Core Web API Template with Swagger toolchain
+ASP.NET Core Web API Template with Swagger and Entity Framework toolchain
 
 ## Getting Started
 
@@ -13,17 +13,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Install template
 ```
-nuget pack Wigo4It.WebApiNSwagTemplate.CSharp.nuspec
-dotnet new -i Wigo4It.WebApiNSwagTemplate.CSharp.1.0.0.nupkg
+nuget pack Wigo4It.WebApiNSwagEfTemplate.CSharp.nuspec
+dotnet new -i Wigo4It.WebApiNSwagEfTemplate.CSharp.1.0.0.nupkg
 ```
-The template **W4WebAPiNSwag** should now appear in the .NET core template list
+The template **W4WebAPiNSwagEf** should now appear in the .NET core template list
 
 | Templates |  Short Name | Language |Tags|
 |:---|:---|:---|:---|
 |Console Application|console|[C#], F#, VB|Common/Console| 
 Class library| classlib| [C#], F#, VB |Common/Library|
 |.......|....... |....... |...... |
-|**WIGO4IT NSwag OpenAPI**| **W4WebApiNSwag**|**[C#]**| **WebAPI/OpenAPI/Swagger**
+|**WIGO4IT NSwag EF OpenAPI**| **W4WebApiNSwag**|**[C#]**| **WebAPI/OpenAPI/Swagger/Entity Framework**
 ASP . NET Core with Angular|angular|[C#]|Web/MVC/SPA|
 |.......|....... |....... |...... |
 
@@ -31,7 +31,7 @@ You can also run the build-template.bat file from the command line.
 
 ## Uninstall template
 ```
-dotnet new -u Wigo4It.WebApiNSwagTemplate.CSharp
+dotnet new -u Wigo4It.WebApiNSwagEfTemplate.CSharp
 ```
 
 ## Using the template
@@ -40,7 +40,7 @@ Create a folder that reflects the name of your api i.e. MyApi (and your namespac
 From within the folder execute the following command:
 
 ```
-dotnet new W4WebApiNSwag
+dotnet new W4WebApiNSwagEf
 ```
 
 MyApi.csproj should now have been created, and the namespace should also reflect MyAPI in the source code files.

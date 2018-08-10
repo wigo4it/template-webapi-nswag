@@ -1,10 +1,10 @@
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Sjef van Leeuwen",
-    "classifications": [ "WebAPI", "OpenAPI", "Swagger" ],
-    "identity": "Wigo4It.WebApiNSwagTemplate.CSharp",
-    "name": "WIGO4IT NSwag OpenAPI",
-    "shortName": "W4WebApiNSwag",
+    "classifications": [ "WebAPI", "OpenAPI", "Swagger", "Entity Framework" ],
+    "identity": "Wigo4It.WebApiNSwagEfTemplate.CSharp",
+    "name": "WIGO4IT NSwag EF OpenAPI",
+    "shortName": "W4WebApiEfNSwag",
     "tags": {
         "language": "C#",
         "type": "project"

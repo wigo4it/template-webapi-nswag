@@ -22,7 +22,7 @@ namespace template_identifier.Models.DTO
         public static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<BookDTO>("SampleEf");
+            builder.EntitySet<BookDTO>("SampleEfOData");
             builder.EntitySet<PressDTO>("Presses");
             return builder.GetEdmModel();
         }

@@ -9,6 +9,8 @@ using System.Net;
 using System.Web.Http;
 using Microsoft.AspNet.OData;
 using static template_identifier.Models.SampleEfModel;
+using AutoMapper;
+using static template_identifier.Models.DTO.SampleModelDTO;
 
 namespace template_identifier.Controllers
 {
@@ -33,15 +35,13 @@ namespace template_identifier.Controllers
         [EnableQuery]
         public IActionResult Get()
         {
-            return Ok(_db.Books);
+            return Ok(Mapper.Map<IEnumerable<BookDTO>>(_db.Books));
         }
-        /*
 
         [EnableQuery]
         public IActionResult Get(int key)
         {
-            return Ok(_db.Books.FirstOrDefault(c => c.Id == key));
-        } 
-        */    
+            return Ok(Mapper.Map<BookDTO>(_db.Books.FirstOrDefault(c => c.Id == key)));
+        }    
     }
 }

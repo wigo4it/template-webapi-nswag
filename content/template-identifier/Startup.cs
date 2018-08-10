@@ -21,6 +21,7 @@ using Microsoft.AspNet.OData.Extensions;
 using template_identifier.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData.Formatter;
+using AutoMapper;
 
 namespace template_identifier
 {
@@ -39,6 +40,7 @@ namespace template_identifier
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Mapper.Initialize(cfg => cfg.AddProfiles(this.GetType()));
         }
 
         public IConfiguration Configuration { get; }

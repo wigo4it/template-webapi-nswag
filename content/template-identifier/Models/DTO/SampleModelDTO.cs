@@ -34,8 +34,10 @@ namespace template_identifier.Models.DTO
             public string Title { get; set; }
             public string Author { get; set; }
             public decimal Price { get; set; }
+            public string PriceDisplay { get; set; }
             public AddressDTO Location { get; set; }
             public PressDTO Press { get; set; }
+            public DateTime LastQuery {get;set;}
         }
 
         // Press

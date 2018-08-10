@@ -19,18 +19,34 @@ namespace template_identifier.Controllers
     /// A project to convert an Edm (Entity Data Model) to OpenApi 3.0. Instead of writing this controller manually
     /// </summary>
     [Route("api/[controller]")]
-    public class SampleEfController : ControllerBase, ISampleController
+    public class SampleController : ControllerBase, ISampleController
     {
-        private ISampleController _implementation;
-
-        public SampleEfController(DataContext context, ISampleController implementation)
+        private DataContext _db;
+        
+        public SampleController(DataContext context)
         {
-            _implementation = implementation;
+            _db = context;
+            if (context.Books.Count() == 0)
+            {
+                foreach (var b in DataSource.GetBooks())
+                {
+                    context.Books.Add(b);
+                    context.Presses.Add(b.Press);
+                }
+                context.SaveChanges();
+            }
         }
 
         [HttpGet]
-        public IActionResult Get(){ return _implementation.Get(); }
+        public IActionResult Get()
+        {
+            return Ok(Mapper.Map<IEnumerable<BookDTO>>(_db.Books));
+        }
+        [HttpGet]
         [Route("{key}")]
-        public IActionResult Get(int key){return _implementation.Get(key); }    
+        public IActionResult Get(int key)
+        {
+            return Ok(Mapper.Map<BookDTO>(_db.Books.FirstOrDefault(c => c.Id == key)));
+        }    
     }
 }

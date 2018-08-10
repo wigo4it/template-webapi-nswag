@@ -17,6 +17,10 @@ using NSwag;
 using NSwag.SwaggerGeneration.Processors.Security;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.OData.Extensions;
+using template_identifier.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNet.OData.Formatter;
 
 namespace template_identifier
 {
@@ -42,9 +46,23 @@ namespace template_identifier
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("datacontext"));
+            services.AddOData();
             services.AddMvc(options =>
             {
                 options.OutputFormatters.Add(new YamlOutputFormatter());
+                // Add odata output supported mediatypes, needed for redoc
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+                }
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+                    
+                }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
         }
@@ -95,14 +113,17 @@ namespace template_identifier
             });
 
             // Enable the Swagger UI middleware and the Swagger generator
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
             app.UseSwaggerReDocWithApiExplorer(s =>
             {
                 s.SwaggerRoute = "/redoc/v1/swagger.json";
                 s.SwaggerUiRoute = "/redoc";
             });
+            app.UseHttpsRedirection();
+            app.UseMvc(options =>
+            {
+                options.MapODataServiceRoute("odata", "odata", template_identifier.Models.DTO.SampleModelDTO.GetEdmModel());
+            });
+
         }
     }
 }

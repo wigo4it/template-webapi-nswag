@@ -12,13 +12,13 @@ namespace template_identifier.Common.Models
   
         private int _pageSize { get; set; } = 10;  
   
-        public int pageSize  
+        public int PageSize  
         {  
   
             get { return _pageSize; }  
             set  
             {  
-                _pageSize = (value > maxPageSize) ? maxPageSize : value;  
+                _pageSize = (value > MaxPageSize) ? MaxPageSize : value;  
             }  
         }  
     }

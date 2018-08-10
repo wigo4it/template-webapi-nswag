@@ -5,55 +5,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using template_identifier.Models;
+using System.Net;
+using System.Web.Http;
+using Microsoft.AspNet.OData;
+using static template_identifier.Models.SampleEfModel;
 
 namespace template_identifier.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SampleEfController : ControllerBase
+    public class SampleEfController : ODataController
     {
-        /// <summary>
-        /// Get values
-        /// </summary>
-        /// <returns>Values</returns>
-        [HttpGet]
-        [Description("Get values")]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+         private DataContext _db;
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        [Description("Get value by providing an Id")]
-        public ActionResult<string> Get(int id)
+        public SampleEfController(DataContext context)
         {
-            using (ValueContext ctx = new ValueContext(null))
+            _db = context;
+            if (context.Books.Count() == 0)
             {
-                return ctx.Values.FirstOrDefault(p=>p.Id==id).Val;
+                foreach (var b in DataSource.GetBooks())
+                {
+                    context.Books.Add(b);
+                    context.Presses.Add(b.Press);
+                }
+                context.SaveChanges();
             }
         }
 
-        // POST api/values
-        [HttpPost]
-        [Description("Post a new value")]
-        public void Post([FromBody] string value)
+        [EnableQuery]
+        public IActionResult Get()
         {
-            
+            return Ok(_db.Books);
         }
+        /*
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        [Description("Update a value by providing its Id")]
-        public void Put(int id, [FromBody] string value)
+        [EnableQuery]
+        public IActionResult Get(int key)
         {
-        }
-        
-        [Description("Delete a value by providing its Id")]
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            return Ok(_db.Books.FirstOrDefault(c => c.Id == key));
+        } 
+        */    
     }
 }

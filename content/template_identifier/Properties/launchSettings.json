@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "template_webapi_nswag": {
+    "template_identifier": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

@@ -18,7 +18,7 @@ using NSwag.SwaggerGeneration.Processors.Security;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace template_webapi_nswag
+namespace template_identifier
 {
     public class YamlOutputFormatter : OutputFormatter
     {
@@ -77,7 +77,7 @@ namespace template_webapi_nswag
                 settings.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "template-webapi-nswag WEB API";
+                    document.Info.Title = "template-identifier WEB API";
                     document.Info.Description = "A templated ASP.NET Core web API";
                     document.Info.TermsOfService = "None";
                     document.Info.Contact = new NSwag.SwaggerContact

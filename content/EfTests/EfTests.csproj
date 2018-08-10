@@ -19,9 +19,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Automapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
-    <PackageReference Include="CacheManager.Microsoft.Extensions.Configuration" Version="1.1.2" />
-    <PackageReference Include="CacheManager.SystemRuntimeCaching" Version="1.1.2" />
-    <PackageReference Include="CacheManager.StackExchange.Redis" Version="1.1.2" />
   </ItemGroup>
 
 </Project>

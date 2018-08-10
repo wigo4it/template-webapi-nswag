@@ -14,34 +14,18 @@ using static template_identifier.Models.DTO.SampleModelDTO;
 
 namespace template_identifier.Controllers
 {
-    public class SampleEfODataController : ODataController
+    public class SampleEfODataController : ODataController, ISampleController 
     {
-         private DataContext _db;
+        private ISampleController _implementation;
 
-        public SampleEfODataController(DataContext context)
+        public SampleEfODataController(DataContext context, ISampleController implementation)
         {
-            _db = context;
-            if (context.Books.Count() == 0)
-            {
-                foreach (var b in DataSource.GetBooks())
-                {
-                    context.Books.Add(b);
-                    context.Presses.Add(b.Press);
-                }
-                context.SaveChanges();
-            }
+            _implementation = implementation;
         }
 
         [EnableQuery]
-        public IActionResult Get()
-        {
-            return Ok(Mapper.Map<IEnumerable<BookDTO>>(_db.Books));
-        }
-
+        public IActionResult Get(){ return _implementation.Get(); }
         [EnableQuery]
-        public IActionResult Get(int key)
-        {
-            return Ok(Mapper.Map<BookDTO>(_db.Books.FirstOrDefault(c => c.Id == key)));
-        }    
+        public IActionResult Get(int key){return _implementation.Get(key); }  
     }
 }

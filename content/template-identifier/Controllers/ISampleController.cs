@@ -18,19 +18,10 @@ namespace template_identifier.Controllers
     /// TODO: Implement https://github.com/xuzhg/OData.OpenAPI
     /// A project to convert an Edm (Entity Data Model) to OpenApi 3.0. Instead of writing this controller manually
     /// </summary>
-    [Route("api/[controller]")]
-    public class SampleEfController : ControllerBase, ISampleController
+    public interface ISampleController
     {
-        private ISampleController _implementation;
+        IActionResult Get();
+        IActionResult Get(int key);
 
-        public SampleEfController(DataContext context, ISampleController implementation)
-        {
-            _implementation = implementation;
-        }
-
-        [HttpGet]
-        public IActionResult Get(){ return _implementation.Get(); }
-        [Route("{key}")]
-        public IActionResult Get(int key){return _implementation.Get(key); }    
     }
 }

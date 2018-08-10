@@ -22,6 +22,7 @@ using template_identifier.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData.Formatter;
 using AutoMapper;
+using template_identifier.Controllers;
 
 namespace template_identifier
 {
@@ -67,6 +68,7 @@ namespace template_identifier
                 }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
+            services.AddScoped<ISampleController, SampleController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,11 +13,11 @@ namespace template_identifier.Controllers
     /// A project to convert an Edm (Entity Data Model) to OpenApi 3.0. Instead of writing this controller manually
     /// </summary>
     [Route("api/[controller]")]
-    public class SampleController : ControllerBase, ISampleController
+    public class SampleEfController : ControllerBase, ISampleController
     {
         private DataContext _db;
         
-        public SampleController(DataContext context)
+        public SampleEfController(DataContext context)
         {
             _db = context;
             if (context.Books.Count() == 0)

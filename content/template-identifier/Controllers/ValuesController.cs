@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using template_webapi_nswag.Models;
 
-namespace template_webapi_nswag.Controllers
+namespace template_identifier.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

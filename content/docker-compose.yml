@@ -9,10 +9,10 @@ x-logging:
 
 services:
   api:
-    image: template-webapi-nswag
+    image: template-identifier
     build:
-      context: ./template-webapi-nswag
+      context: ./template-identifier
       dockerfile: Dockerfile
-    hostname: template-webapi-nswag
+    hostname: template-identifier
     restart: always
     logging: *default-logging

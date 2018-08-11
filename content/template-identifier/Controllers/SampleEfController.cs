@@ -5,20 +5,19 @@ using template_identifier.Models;
 using static template_identifier.Models.SampleEfModel;
 using AutoMapper;
 using static template_identifier.Models.DTO.SampleModelDTO;
+using App.Metrics;
+using template_identifier.Metrics;
 
 namespace template_identifier.Controllers
 {
-    /// <summary>
-    /// TODO: Implement https://github.com/xuzhg/OData.OpenAPI
-    /// A project to convert an Edm (Entity Data Model) to OpenApi 3.0. Instead of writing this controller manually
-    /// </summary>
     [Route("api/[controller]")]
     public class SampleEfController : ControllerBase, ISampleController
     {
         private DataContext _db;
         
-        public SampleEfController(DataContext context)
+        public SampleEfController(DataContext context, IMetrics metrics)
         {
+            Metrics = metrics;
             _db = context;
             if (context.Books.Count() == 0)
             {
@@ -30,17 +29,25 @@ namespace template_identifier.Controllers
                 context.SaveChanges();
             }
         }
+        public IMetrics Metrics { get;set; }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(Mapper.Map<IEnumerable<BookDTO>>(_db.Books));
+            using (Metrics.Measure.Timer.Time(SampleRegistry.GetBooksTimer))
+            {
+                return Ok(Mapper.Map<IEnumerable<BookDTO>>(_db.Books));
+            }
         }
+
         [HttpGet]
         [Route("{key}")]
         public IActionResult Get(int key)
         {
-            return Ok(Mapper.Map<BookDTO>(_db.Books.FirstOrDefault(c => c.Id == key)));
+            using (Metrics.Measure.Timer.Time(SampleRegistry.GetBookTimer))
+            {
+                return Ok(Mapper.Map<BookDTO>(_db.Books.FirstOrDefault(c => c.Id == key)));
+            }
         }    
     }
 }

@@ -2,33 +2,6 @@
 
 ASP.NET Core Web API Template with Swagger, ODATA and Entity Framework toolchain.  
 
-## Endpoints
-
-OData is added as a common data format, often used by low code platforms.
-* OData JSON Schema https://localhost:5001/odata
-* OData Metadata Schema https://localhost:5001/odata/$metadata
-* OData Retrieve Data Sample List https://localhost:5001/odata/sampleefodata
-* OData Retrieve Sata Sample https://localhost:5001/odata/sampleefodata/1
-
-* OpenAPI JSON Schema https://localhost:5001/swagger/v1/swagger.json
-* OpenAPI Swagger UI https://localhost:5001/swagger
-* OpenAPI Retrieve Data Sample List https://localhost:5001/api/sampleef
-* OpenAPI Retrieve Sata Sample https://localhost:5001/api/sampleef/1
-
-## Mapper
-
-There's a siumple mapper (AutoMapper) example. The Entity Book, is mapped to a DTO. As a sample
-it changes the format of the ISBN, populates an extra field in the DTO with displayedPrice. 
-Also introduces a last query date time.
-
-```csharp
-
-CreateMap<Book, BookDTO>()
-    .ForMember(dest => dest.ISBN, m => m.MapFrom(src => src.ISBN.Replace("-","")))
-    .ForMember(dest => dest.PriceDisplay, m => m.MapFrom(p=> "$"+ p.Price.ToString()))
-    .ForMember(p=>p.LastQuery,m=>m.UseValue(DateTime.Now));
-
-```
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -85,6 +58,111 @@ The API should now be reachable from:
 * [SWAGGER](http://localhost:5080/swagger) - Swagger API documentation page
 * [REDOC](http://localhost:5080/redoc) - Redoc API documentation page
 
+## Available API Endpoints
+
+### ODATA
+
+OData is added as a common data format, often used by low code platforms.
+* OData JSON Schema https://localhost:5001/odata
+* OData Metadata Schema https://localhost:5001/odata/$metadata
+* OData Retrieve Data Sample List https://localhost:5001/odata/sampleefodata
+* OData Retrieve Sata Sample https://localhost:5001/odata/sampleefodata/1
+
+### OpenAPI
+
+* OpenAPI JSON Schema https://localhost:5001/swagger/v1/swagger.json
+* OpenAPI Swagger UI https://localhost:5001/swagger
+* OpenAPI Retrieve Data Sample List https://localhost:5001/api/sampleef
+* OpenAPI Retrieve Sata Sample https://localhost:5001/api/sampleef/1
+
+### Metrics (APP-Metrics)
+
+ * https://localhost:5001/metrics	Exposes a metrics snapshot using the configured metrics formatter.
+ * https://localhost:5001/metrics-text	Exposes a metrics snapshot using the configured text formatter.
+ * https://localhost:5001/env	Exposes environment information about the application e.g. OS, Machine Name, Assembly Name, Assembly Version etc.
+
+## Mapper
+
+There's a siumple mapper (AutoMapper) example. The Entity Book, is mapped to a DTO. As a sample
+it changes the format of the ISBN, populates an extra field in the DTO with displayedPrice. 
+Also introduces a last query date time.
+
+```csharp
+
+CreateMap<Book, BookDTO>()
+    .ForMember(dest => dest.ISBN, m => m.MapFrom(src => src.ISBN.Replace("-","")))
+    .ForMember(dest => dest.PriceDisplay, m => m.MapFrom(p=> "$"+ p.Price.ToString()))
+    .ForMember(p=>p.LastQuery,m=>m.UseValue(DateTime.Now));
+
+```
+## Metrics Monitoring
+
+As part of OpenAPM standard we suggest to use Prometheus as a distributor to Grafana dashboards. 
+
+Below you will find an example of the openAPM eco system
+
+![OpenAPM](./doc/openAPM-Landscape.png)
+
+Pleas visit [OpenAPM](https://openaom.io) for more information.
+
+### Metrics
+
+[APP-METRICS](https://www.app-metrics.io/web-monitoring/aspnet-core/) Metrics Dashboard for .NET Core
+The sample project contains a couple of counters for the Sample API Controller
+
+#### Get Book
+
+```json
+        {
+          "name": "Get Book Timer|server:IDE2,app:template-identifier,env:development",
+          "unit": "items",
+          "activeSessions": 0,
+          "count": 3,
+          "durationUnit": "ms",
+          "histogram": {
+            "lastValue": 0.7673,
+            "max": 69.5817,
+            "mean": 23.248790664825354,
+            "median": 2.1208,
+            "min": 0.7673,
+            "percentile75": 69.5817,
+            "percentile95": 69.5817,
+            "percentile98": 69.5817,
+            "percentile99": 69.5817,
+            "percentile999": 69.5817,
+            "sampleSize": 3,
+            "stdDev": 31.797149030432504,
+            "sum": 72.469799999999992
+          }
+```
+
+#### Get Books
+
+reports the timer on querying books from the database.
+
+```json
+        {
+          "name": "Get Books Timer|server:IDE2,app:template-identifier,env:development",
+          "unit": "items",
+          "activeSessions": 0,
+          "count": 2,
+          "durationUnit": "ms",
+          "histogram": {
+            "lastValue": 21.156399999999998,
+            "max": 244.2301,
+            "mean": 120.1980241848166,
+            "median": 21.156399999999998,
+            "min": 21.156399999999998,
+            "percentile75": 244.2301,
+            "percentile95": 244.2301,
+            "percentile98": 244.2301,
+            "percentile99": 244.2301,
+            "percentile999": 244.2301,
+            "sampleSize": 2,
+            "stdDev": 110.83473390481015,
+            "sum": 265.3865
+        }
+```
 ## Built With
 
 * [VSCODE](https://code.visualstudio.com/) - The IDE used
@@ -100,4 +178,4 @@ Pull requests are accepted
 
 ## License
 
-This project is licensed under the GPL-V3 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL-V3 License - see the [LICENSE](LICENSE) file for details

@@ -4,16 +4,26 @@ ASP.NET Core Web API Template with Swagger, ODATA and Entity Framework toolchain
 
 ## Endpoints
 
+### ODATA
+
 OData is added as a common data format, often used by low code platforms.
 * OData JSON Schema https://localhost:5001/odata
 * OData Metadata Schema https://localhost:5001/odata/$metadata
 * OData Retrieve Data Sample List https://localhost:5001/odata/sampleefodata
 * OData Retrieve Sata Sample https://localhost:5001/odata/sampleefodata/1
 
+### OpenAPI
+
 * OpenAPI JSON Schema https://localhost:5001/swagger/v1/swagger.json
 * OpenAPI Swagger UI https://localhost:5001/swagger
 * OpenAPI Retrieve Data Sample List https://localhost:5001/api/sampleef
 * OpenAPI Retrieve Sata Sample https://localhost:5001/api/sampleef/1
+
+### Metrics (GRAFANA)
+
+ * https://localhost:5001/metrics	Exposes a metrics snapshot using the configured metrics formatter.
+ * https://localhost:5001/metrics-text	Exposes a metrics snapshot using the configured text formatter.
+ * https://localhost:5001/env	Exposes environment information about the application e.g. OS, Machine Name, Assembly Name, Assembly Version etc.
 
 ## Mapper
 
@@ -29,6 +39,13 @@ CreateMap<Book, BookDTO>()
     .ForMember(p=>p.LastQuery,m=>m.UseValue(DateTime.Now));
 
 ```
+# Health Monitoring
+
+[GRAFANA](https://www.app-metrics.io/web-monitoring/aspnet-core/) Metrics Dashboard for .NET Core
+
+
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.

@@ -2,6 +2,13 @@
 
 ASP.NET Core Web API Template with Swagger toolchain
 
+This is the master repository, and contains the minimal set of functionality. The feature branches are following the forward integration branching strategy but doe not reverse integrate back to master. This way you can pick and choose which feature you want.
+
+## Available Features
+
+[Entity Famework](../../tree/entity-framework) Web API integrated EF, OData endpoints and Performance Metrics.  
+[Entity Framework Rebus](../../tree/entity-framework) like Entity Framework but added with Rebus the (Pub/Sub) lean service bus.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.

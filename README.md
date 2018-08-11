@@ -101,7 +101,7 @@ As part of OpenAPM standard we suggest to use Prometheus as a distributor to Gra
 
 Below you will find an example of the openAPM eco system
 
-![OpenAPM](./doc/openAPM.svg)
+![OpenAPM](./doc/openAPM-Landscape.png)
 
 Pleas visit [OpenAPM](https://openaom.io) for more information.
 

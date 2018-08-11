@@ -63,27 +63,27 @@ The API should now be reachable from:
 ### ODATA
 
 OData is added as a common data format, often used by low code platforms.
-* OData JSON Schema https://localhost:5001/odata
-* OData Metadata Schema https://localhost:5001/odata/$metadata
-* OData Retrieve Data Sample List https://localhost:5001/odata/sampleefodata
-* OData Retrieve Sata Sample https://localhost:5001/odata/sampleefodata/1
+* OData JSON Schema http://localhost:5080/odata
+* OData Metadata Schema http://localhost:5080/odata/$metadata
+* OData Retrieve Data Sample List http://localhost:5080/odata/sampleefodata
+* OData Retrieve Sata Sample http://localhost:5080/odata/sampleefodata/1
 
 ### OpenAPI
 
-* OpenAPI JSON Schema https://localhost:5001/swagger/v1/swagger.json
-* OpenAPI Swagger UI https://localhost:5001/swagger
-* OpenAPI Retrieve Data Sample List https://localhost:5001/api/sampleef
-* OpenAPI Retrieve Sata Sample https://localhost:5001/api/sampleef/1
+* OpenAPI JSON Schema http://localhost:5080/swagger/v1/swagger.json
+* OpenAPI Swagger UI http://localhost:5080/swagger
+* OpenAPI Retrieve Data Sample List http://localhost:5080/api/sampleef
+* OpenAPI Retrieve Sata Sample http://localhost:5080/api/sampleef/1
 
 ### Metrics (APP-Metrics)
 
- * https://localhost:5001/metrics	Exposes a metrics snapshot using the configured metrics formatter.
- * https://localhost:5001/metrics-text	Exposes a metrics snapshot using the configured text formatter.
- * https://localhost:5001/env	Exposes environment information about the application e.g. OS, Machine Name, Assembly Name, Assembly Version etc.
+ * http://localhost:5080/metrics	Exposes a metrics snapshot using the configured metrics formatter.
+ * http://localhost:5080/metrics-text	Exposes a metrics snapshot using the configured text formatter.
+ * http://localhost:5080/env	Exposes environment information about the application e.g. OS, Machine Name, Assembly Name, Assembly Version etc.
 
 ## Mapper
 
-There's a siumple mapper (AutoMapper) example. The Entity Book, is mapped to a DTO. As a sample
+There's a simple mapper (AutoMapper) example. The Entity Book, is mapped to a DTO. As a sample
 it changes the format of the ISBN, populates an extra field in the DTO with displayedPrice. 
 Also introduces a last query date time.
 

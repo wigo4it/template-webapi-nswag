@@ -138,7 +138,7 @@ namespace template_identifier
             var metrics = new MetricsBuilder().Report.ToConsole().Build();
             //var counter = new CounterOptions { Name = "my_counter" };
             //metrics.Measure.Counter.Increment(counter);
-
+            /*
             var scheduler = new AppMetricsTaskScheduler(
                 TimeSpan.FromSeconds(10),
                 async () =>
@@ -146,6 +146,7 @@ namespace template_identifier
                     await Task.WhenAll(metrics.ReportRunner.RunAllAsync());
                 });
             scheduler.Start();
+            */
 
         }
     }

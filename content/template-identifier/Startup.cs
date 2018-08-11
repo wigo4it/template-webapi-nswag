@@ -17,6 +17,15 @@ using NSwag;
 using NSwag.SwaggerGeneration.Processors.Security;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNet.OData.Extensions;
+using template_identifier.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNet.OData.Formatter;
+using AutoMapper;
+using template_identifier.Controllers;
+using App.Metrics;
+using App.Metrics.Counter;
+using App.Metrics.Scheduling;
 
 namespace template_identifier
 {
@@ -35,6 +44,7 @@ namespace template_identifier
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Mapper.Initialize(cfg => cfg.AddProfiles(this.GetType()));
         }
 
         public IConfiguration Configuration { get; }
@@ -42,11 +52,30 @@ namespace template_identifier
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("datacontext"));
+            services.AddOData();
             services.AddMvc(options =>
             {
                 options.OutputFormatters.Add(new YamlOutputFormatter());
+                // Add odata output supported mediatypes, needed for redoc
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+                }
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+                    
+                }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
+            services.AddMetrics();
+
+            // controller implementations
+            services.AddScoped<ISampleController, SampleEfController>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,14 +124,30 @@ namespace template_identifier
             });
 
             // Enable the Swagger UI middleware and the Swagger generator
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
             app.UseSwaggerReDocWithApiExplorer(s =>
             {
                 s.SwaggerRoute = "/redoc/v1/swagger.json";
                 s.SwaggerUiRoute = "/redoc";
             });
+            app.UseHttpsRedirection();
+            app.UseMvc(options =>
+            {
+                options.MapODataServiceRoute("odata", "odata", template_identifier.Models.DTO.SampleModelDTO.GetEdmModel());
+            });
+
+            var metrics = new MetricsBuilder().Report.ToConsole().Build();
+            //var counter = new CounterOptions { Name = "my_counter" };
+            //metrics.Measure.Counter.Increment(counter);
+            /*
+            var scheduler = new AppMetricsTaskScheduler(
+                TimeSpan.FromSeconds(10),
+                async () =>
+                {
+                    await Task.WhenAll(metrics.ReportRunner.RunAllAsync());
+                });
+            scheduler.Start();
+            */
+
         }
     }
 }

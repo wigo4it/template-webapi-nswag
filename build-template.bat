@@ -1,3 +1,3 @@
-dotnet new -u WebApiNSwagEfTemplate
-nuget pack WebApiNSwagEfTemplate.nuspec
-dotnet new -i WebApiNSwagEfTemplate.0.0.1.nupkg
+dotnet new -u WebApiNSwagEfRebusTemplate
+nuget pack WebApiNSwagEfRebusTemplate.nuspec
+dotnet new -i WebApiNSwagEfRebusTemplate.0.0.1.nupkg

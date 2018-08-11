@@ -1,6 +1,7 @@
-# OpenAPI Templates (Entity Framework)
+# OpenAPI Templates (Entity Framework with Rebus)
 
 ASP.NET Core Web API Template with Swagger, ODATA and Entity Framework toolchain.  
+Rebus is included as a lean service bus.
 
 ## Getting Started
 
@@ -16,14 +17,14 @@ These instructions will get you a copy of the project up and running on your loc
 nuget pack Wigo4It.WebApiNSwagEfTemplate.CSharp.nuspec
 dotnet new -i Wigo4It.WebApiNSwagEfTemplate.CSharp.1.0.0.nupkg
 ```
-The template **W4WebAPiNSwagEf** should now appear in the .NET core template list
+The template **W4WebAPiNSwagEfRebus** should now appear in the .NET core template list
 
 | Templates |  Short Name | Language |Tags|
 |:---|:---|:---|:---|
 |Console Application|console|[C#], F#, VB|Common/Console| 
 Class library| classlib| [C#], F#, VB |Common/Library|
 |.......|....... |....... |...... |
-|**WIGO4IT NSwag EF OpenAPI**| **W4WebApiNSwag**|**[C#]**| **WebAPI/OpenAPI/Swagger/Entity Framework**
+|**NSwag EF with Rebus OpenAPI**| **W4WebApiNSwagEfRebus**|**[C#]**| **WebAPI/OpenAPI/Swagger/EF/Rebus**
 ASP . NET Core with Angular|angular|[C#]|Web/MVC/SPA|
 |.......|....... |....... |...... |
 
@@ -31,19 +32,19 @@ You can also run the build-template.bat file from the command line.
 
 ## Uninstall template
 ```
-dotnet new -u Wigo4It.WebApiNSwagEfTemplate.CSharp
+dotnet new -u WebApiNSwagEfRebusTemplate.CSharp
 ```
 
 ## Using the template
 
-Create a folder that reflects the name of your api i.e. MyApi (and your namespace).
+Create a folder that reflects the name of your api i.e. my-api (and your namespace).
 From within the folder execute the following command:
 
 ```
-dotnet new W4WebApiNSwagEf
+dotnet new W4WebApiNSwagEfRebus
 ```
 
-MyApi.csproj should now have been created, and the namespace should also reflect MyAPI in the source code files.
+may-api.csproj should now have been created, and the namespace should also reflect my-api in the source code files.
 
 ### Building Docker Images
 

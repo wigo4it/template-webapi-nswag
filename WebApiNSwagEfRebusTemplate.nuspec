@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>WebApiNSwagEfTemplate</id>
+    <id>WebApiNSwagEfRebusTemplate</id>
     <version>0.0.1</version>
     <description>
-      WIGO4IT NSwag OpenAPI Template with Entity Framework
+      NSwag OpenAPI Template with Entity Framework and Rebus Lean Service Bus
     </description>
     <authors>Sjef van Leeuwen</authors>
     <packageTypes>

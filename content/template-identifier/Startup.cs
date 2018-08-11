@@ -23,6 +23,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData.Formatter;
 using AutoMapper;
 using template_identifier.Controllers;
+using App.Metrics;
+using App.Metrics.Counter;
+using App.Metrics.Scheduling;
 
 namespace template_identifier
 {
@@ -69,6 +72,8 @@ namespace template_identifier
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwagger();
             services.AddMetrics();
+
+            // controller implementations
             services.AddScoped<ISampleController, SampleEfController>();
 
         }
@@ -129,6 +134,18 @@ namespace template_identifier
             {
                 options.MapODataServiceRoute("odata", "odata", template_identifier.Models.DTO.SampleModelDTO.GetEdmModel());
             });
+
+            var metrics = new MetricsBuilder().Report.ToConsole().Build();
+            //var counter = new CounterOptions { Name = "my_counter" };
+            //metrics.Measure.Counter.Increment(counter);
+
+            var scheduler = new AppMetricsTaskScheduler(
+                TimeSpan.FromSeconds(10),
+                async () =>
+                {
+                    await Task.WhenAll(metrics.ReportRunner.RunAllAsync());
+                });
+            scheduler.Start();
 
         }
     }

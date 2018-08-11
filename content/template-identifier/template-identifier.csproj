@@ -23,5 +23,6 @@
     <PackageReference Include="CacheManager.Microsoft.Extensions.Configuration" Version="1.1.2" />
     <PackageReference Include="CacheManager.StackExchange.Redis" Version="1.1.2" />
     <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="App.Metrics.Reporting.Console" Version="2.0.0" />
   </ItemGroup>
 </Project>

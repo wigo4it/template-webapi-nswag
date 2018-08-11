@@ -1,3 +1,4 @@
+using App.Metrics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace template_identifier.Controllers
@@ -11,5 +12,6 @@ namespace template_identifier.Controllers
         IActionResult Get();
         IActionResult Get(int key);
 
+        IMetrics Metrics { get; set; }
     }
 }

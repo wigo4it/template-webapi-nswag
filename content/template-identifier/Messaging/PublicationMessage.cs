@@ -18,7 +18,7 @@ namespace template_identifier.PublicationMessage
         [Key(5)]
         public uint Level {get;set;}
         [Key(6)]
-        public DateTime Date {get;set;}
+        public long Ticks {get;set;}
         [Key(7)]
         public uint Sequence {get;set;}
         [Key(8)]
@@ -29,5 +29,14 @@ namespace template_identifier.PublicationMessage
         public string IdentityData {get;set;}
         [Key(11)]
         public uint Priority {get;set;}
+        [IgnoreMember]
+        public DateTime Date {
+            get{
+                return new DateTime(Ticks);
+            }
+            set {
+                Ticks = value.Ticks;
+            }
+        }
     }
 }

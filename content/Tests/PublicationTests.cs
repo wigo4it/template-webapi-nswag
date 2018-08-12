@@ -8,12 +8,12 @@ namespace Tests {
     public class PublicationTests {
          [TestMethod]
         public void can_serialize_publication_message() {
-            var date = DateTime.Now;
+            var date = DateTime.Now.Ticks;
             var target = MessagePackSerializer.Serialize(new PublicationMessage(){
                 CorrelationId = "correlationId",
                 AccountingToken = "accountingToken",
                 Data = "data",
-                Date = date
+                Ticks = date
             });
             var result = MessagePackSerializer.Deserialize<PublicationMessage>(target);
             Assert.AreSame(target,result);

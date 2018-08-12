@@ -1,6 +1,6 @@
 namespace template_identifier.PublicationMessage
 {
-    public class MessageDescriptor
+    public class PublicationMessageDescriptor
     {
         public string AccountingToken {get;set;}
         public string IdentityData {get;set;}

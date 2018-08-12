@@ -4,7 +4,7 @@ namespace template_identifier.PublicationMessage
 {
     public class PublicationMessage {
 
-        public MessageDescriptor Description {get;set;}
+        public PublicationMessageDescriptor Description {get;set;}
         public string Topic {get;set;}
         public string UserData {get;set;}
         public bool IsRetained {get;set;}

@@ -6,7 +6,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include = "..\template-identifier\template-identifier.csproj" />
+    <ProjectReference Include = "..\content\template-identifier\template-identifier.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Automapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
+    <PackageReference Include="MessagePack" Version="1.7.3.4" />
+    <PackageReference Include="CompareNETObjects" Version="4.55.0" />
+    <PackageReference Include="Rebus.Tests.Contracts" Version="5.0.0-b06" />
+    <PackageReference Include="Rebus.TestHelpers" Version="5.0.0-b04" />
+    <PackageReference Include="Rebus.RabbitMQ" Version="5.0.0-b02" />
+    <!--
+    <PackageReference Include="RabbitMQ.Fakes.DotNetCore" Version="0.9.1" />
+    -->
   </ItemGroup>
-
 </Project>

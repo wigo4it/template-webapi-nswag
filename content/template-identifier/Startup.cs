@@ -26,6 +26,11 @@ using template_identifier.Controllers;
 using App.Metrics;
 using App.Metrics.Counter;
 using App.Metrics.Scheduling;
+using Rebus.ServiceProvider;
+using Rebus.Transport.InMem;
+using Rebus.Routing.TypeBased;
+using Microsoft.AspNetCore.Http;
+using Rebus.Bus;
 
 namespace template_identifier
 {
@@ -52,6 +57,7 @@ namespace template_identifier
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("datacontext"));
             services.AddOData();
             services.AddMvc(options =>
@@ -76,12 +82,37 @@ namespace template_identifier
             // controller implementations
             services.AddScoped<ISampleController, SampleEfController>();
 
+            // Register handlers 
+           // services.AutoRegisterHandlersFromAssemblyOf<Handler1>();
+
+            // Configure and register Rebus
+            services.AddRebus(configure => configure
+                .Transport(t => t.UseInMemoryTransport(new InMemNetwork(), "Messages")));
+               // .Routing(r => r.TypeBased().MapAssemblyOf<Message1>("Messages")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();
+            app.UseRebus();
+            /* 
+                .Run(async (context) =>
+                {
+                    var bus = app.ApplicationServices.GetRequiredService<IBus>();
+                    var logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
+
+                    logger.LogInformation("Publishing {MessageCount} messages", 10);
+
+                    await Task.WhenAll(
+                        Enumerable.Range(0, 10)
+                            .Select(i => new Message1())
+                            .Select(message => bus.Send(message)));
+
+                    await context.Response.WriteAsync("Rebus sent another 10 messages!");
+                });
+                */
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -93,6 +124,8 @@ namespace template_identifier
 
             app.UseSwaggerUi3(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
+                //openapi 3.0 not yet stable, using 2.0 instead.
+                //settings.GeneratorSettings.SchemaType = NJsonSchema.SchemaType.OpenApi3;
                 settings.GeneratorSettings.DocumentProcessors.Add(new SecurityDefinitionAppender("API_HEADER", new SwaggerSecurityScheme
                 {
                     Type = SwaggerSecuritySchemeType.ApiKey,
@@ -135,6 +168,9 @@ namespace template_identifier
                 options.MapODataServiceRoute("odata", "odata", template_identifier.Models.DTO.SampleModelDTO.GetEdmModel());
             });
 
+            app.UseCors(builder =>
+                builder.WithOrigins("https://editor.swagger.io/"));
+
             var metrics = new MetricsBuilder().Report.ToConsole().Build();
             //var counter = new CounterOptions { Name = "my_counter" };
             //metrics.Measure.Counter.Increment(counter);
@@ -147,6 +183,7 @@ namespace template_identifier
                 });
             scheduler.Start();
             */
+
 
         }
     }

@@ -1,10 +1,10 @@
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Sjef van Leeuwen",
-    "classifications": [ "WebAPI", "OpenAPI", "Swagger", "EF" ],
-    "identity": "WebApiNSwagEfTemplate.CSharp",
-    "name": "NSwag EF OpenAPI",
-    "shortName": "W4WebApiNSwagEf",
+    "classifications": [ "WebAPI", "OpenAPI", "Swagger", "EF", "Rebus" ],
+    "identity": "WebApiNSwagEfRebusTemplate",
+    "name": "NSwag EF with Rebus OpenAPI",
+    "shortName": "W4WebApiNSwagEfRebus",
     "tags": {
         "language": "C#",
         "type": "project"

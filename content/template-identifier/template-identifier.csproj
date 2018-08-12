@@ -24,5 +24,8 @@
     <PackageReference Include="CacheManager.StackExchange.Redis" Version="1.1.2" />
     <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="App.Metrics.Reporting.Console" Version="2.0.0" />
+    <PackageReference Include="Rebus" Version="5.0.0-b15" />
+    <PackageReference Include="Rebus.ServiceProvider" Version="4.0.1" />
+    <PackageReference Include="MessagePack" Version="1.7.3.4" />
   </ItemGroup>
 </Project>

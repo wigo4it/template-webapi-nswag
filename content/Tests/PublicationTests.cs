@@ -1,4 +1,5 @@
 using System;
+using KellermanSoftware.CompareNetObjects;
 using MessagePack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using template_identifier.PublicationMessage;
@@ -6,17 +7,22 @@ using template_identifier.PublicationMessage;
 namespace Tests {
     [TestClass]
     public class PublicationTests {
+
+        private CompareLogic obj = new CompareLogic();
          [TestMethod]
         public void can_serialize_publication_message() {
-            var date = DateTime.Now.Ticks;
-            var target = MessagePackSerializer.Serialize(new PublicationMessage(){
+            var target = new PublicationMessage(){
                 CorrelationId = "correlationId",
                 AccountingToken = "accountingToken",
                 Data = "data",
-                Ticks = date
-            });
-            var result = MessagePackSerializer.Deserialize<PublicationMessage>(target);
-            Assert.AreSame(target,result);
+                Date = DateTime.Now
+            };
+            var wire = MessagePackSerializer.Serialize(target);
+            var result = MessagePackSerializer.Deserialize<PublicationMessage>(wire);
+            Assert.IsTrue(obj.Compare(target,result).AreEqual);
+            // make sure something got set/serialized.
+            target.Date = DateTime.UtcNow;
+            Assert.IsFalse(obj.Compare(target,result).AreEqual);
         }
     }
 }

@@ -1,7 +1,10 @@
 using System;
 
-namespace template_identifier.PublicationMessage {
+namespace template_identifier.PublicationMessage
+{
     public class PublicationMessage {
+
+        public MessageDescriptor Description {get;set;}
         public string Topic {get;set;}
         public string UserData {get;set;}
         public bool IsRetained {get;set;}
@@ -11,10 +14,4 @@ namespace template_identifier.PublicationMessage {
         public uint Sequence {get;set;}
         public string Data {get;set;}
     }
-
-    public enum PublicationOptions
-    {
-        Default = 0
-    }
-
 }

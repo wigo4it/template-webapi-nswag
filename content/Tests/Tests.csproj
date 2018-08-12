@@ -20,8 +20,7 @@
     <PackageReference Include="Automapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
     <PackageReference Include="MessagePack" Version="1.7.3.4" />
-    <PackageReference Include="DeepEqual" Version="1.6.0" />
-
+    <PackageReference Include="CompareNETObjects" Version="4.55.0" />
   </ItemGroup>
 
 </Project>

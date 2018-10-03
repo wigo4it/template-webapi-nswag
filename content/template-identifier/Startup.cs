@@ -132,22 +132,9 @@ namespace template_identifier
             app.UseHttpsRedirection();
             app.UseMvc(options =>
             {
+                options.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
                 options.MapODataServiceRoute("odata", "odata", template_identifier.Models.DTO.SampleModelDTO.GetEdmModel());
             });
-
-            var metrics = new MetricsBuilder().Report.ToConsole().Build();
-            //var counter = new CounterOptions { Name = "my_counter" };
-            //metrics.Measure.Counter.Increment(counter);
-            /*
-            var scheduler = new AppMetricsTaskScheduler(
-                TimeSpan.FromSeconds(10),
-                async () =>
-                {
-                    await Task.WhenAll(metrics.ReportRunner.RunAllAsync());
-                });
-            scheduler.Start();
-            */
-
         }
     }
 }

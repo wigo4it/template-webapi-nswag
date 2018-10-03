@@ -21,6 +21,7 @@ namespace template_identifier
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseMetrics()
+                .UseUrls("http://0.0.0.0.0:5080")
                 .UseStartup<Startup>();
     }
 }

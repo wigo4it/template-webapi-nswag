@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 using Microsoft.OData.Edm;
 using Microsoft.AspNet.OData.Builder;
+using static template_identifier.Models.SampleEfModel;
 
 namespace template_identifier.Models.DTO
 {
@@ -22,8 +23,8 @@ namespace template_identifier.Models.DTO
         public static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<BookDTO>("SampleEfOData");
-            builder.EntitySet<PressDTO>("Presses");
+            builder.EntitySet<Book>("SampleGeneric");
+            //builder.EntitySet<PressDTO>("Presses");
             return builder.GetEdmModel();
         }
 

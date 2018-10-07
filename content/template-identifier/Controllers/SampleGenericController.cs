@@ -16,7 +16,6 @@ namespace template_identifier.Controllers
     {
         public SampleGenericController(DataContext context, IMetrics metrics) : base(context, metrics)
         {
-            System.Diagnostics.Debug.WriteLine("cool");
             if (context.Books.Count() == 0)
             {
                 foreach (var b in DataSource.GetBooks())

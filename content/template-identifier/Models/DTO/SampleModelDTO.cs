@@ -24,6 +24,7 @@ namespace template_identifier.Models.DTO
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Book>("SampleGeneric");
+            builder.EntityType<Book>().Action("Rate").Parameter<int>("Rating");
             //builder.EntitySet<PressDTO>("Presses");
             return builder.GetEdmModel();
         }

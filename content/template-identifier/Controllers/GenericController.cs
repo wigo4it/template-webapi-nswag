@@ -35,12 +35,6 @@ namespace ProductService.Controllers
             return db.Set<T>();
         }
 
-        // protected override void Dispose(bool disposing)
-        // {
-        //     db.Dispose();
-        //     base.Dispose(disposing);
-        // }
-
         #region CRUD
 
         // E.g. GET http://localhost/Products
@@ -54,6 +48,7 @@ namespace ProductService.Controllers
 
         // E.g. GET http://localhost/Products(1)
         [EnableQuery]
+        [Route("{id:int}")]
         public SingleResult<T> Get([FromODataUri] long key)
         {
             using (Metrics.Measure.Timer.Time(GenericRegistry.GetById(typeof(T)))) {
@@ -63,6 +58,7 @@ namespace ProductService.Controllers
         }
 
         // E.g. POST http://localhost/Products
+        [HttpPost]
         public async Task<IActionResult> Post(T obj)
         {
             if (!ModelState.IsValid)
@@ -77,6 +73,7 @@ namespace ProductService.Controllers
         }
 
         // E.g. PATCH http://localhost/Products(1)
+        [HttpPatch]
         public async Task<IActionResult> Patch([FromODataUri] long key, Delta<T> delta)
         {
             if (!ModelState.IsValid)
@@ -110,6 +107,7 @@ namespace ProductService.Controllers
         }
 
         // E.g. PUT http://localhost/Products(1)
+        [HttpPut]
         public async Task<IActionResult> Put([FromODataUri] long key, T obj)
         {
             if (!ModelState.IsValid)
@@ -143,6 +141,7 @@ namespace ProductService.Controllers
         }
 
         // E.g. DELETE http://localhost/Products(1)
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromODataUri] long key)
         {
             using (Metrics.Measure.Timer.Time(GenericRegistry.Delete(typeof(T)))) {

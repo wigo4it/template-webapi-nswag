@@ -1,4 +1,4 @@
-# OpenAPI Templates (Entity Framework)
+# (ODATA) RESTful OpenAPI Templates (Entity Framework)
 
 ASP.NET Core Web API Template with Swagger, ODATA and Entity Framework toolchain.  
 
